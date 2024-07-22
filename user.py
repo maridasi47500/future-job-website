@@ -1,6 +1,7 @@
 # coding=utf-8
 import sqlite3
 import sys
+import os
 import re
 from ai import Ai
 from model import Model
@@ -14,6 +15,8 @@ class User(Model):
         email text,
         mypic text,
         country_id text,
+        job_id text,
+        description text,
         phone text,
         gender text,
             password text,
@@ -70,14 +73,13 @@ class User(Model):
         print("M Y H A S H")
         print(myhash,myhash.keys())
         myid=None
-        ai=None
-        aiid=None
         msg=""
         try:
-          self.cur.execute("insert into user (email,country_id,phone,password,mypic,gender,nomcomplet) values (:email,:country_id,:phone,:password,:mypic,:gender,:nomcomplet)",myhash)
+          self.cur.execute("insert into user (description,job_id,email,country_id,phone,password,mypic,gender,nomcomplet) values (:description,:job_id,:email,:country_id,:phone,:password,:mypic,:gender,:nomcomplet)",myhash)
           self.con.commit()
           myid=str(self.cur.lastrowid)
-          ai=Ai().create({"username":myhash["nomcomplet"],"name":myhash["nomcomplet"],"description":"","gender":myhash["gender"],"mypic":myhash["mypic"],"user_id":myid})
+          myjobname="../python_become_jobname"
+          os.mkdir(myjobname)
         except Exception as e:
           print("my error"+str(e))
           msg+=str(e)
@@ -85,20 +87,17 @@ class User(Model):
         try:
           if myid and myid is not None:
             azerty["user_id"]=myid
-            azerty["ai_id"]=ai["ai_id"]
             azerty["name"]=myhash["nomcomplet"]
             azerty["email"]=myhash["email"]
             azerty["notice"]="votre user a été ajouté"
           else:
             azerty["user_id"]=""
-            azerty["ai_id"]=""
             azerty["name"]=""
             azerty["email"]=""
             azerty["notice"]="votre inscription n'a pas fonctionné"+msg
         except Exception as ee:
           azerty["user_id"]=""
           azerty["name"]=""
-          azerty["ai_id"]=""
           azerty["email"]=""
           azerty["notice"]="votre inscription n'a pas fonctionné"+msg+str(ee)
         return azerty
