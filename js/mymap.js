@@ -42,7 +42,7 @@ const LeafIcon = L.Icon.extend({
    function onMapClick(e) {
            var mylat = document.getElementById("champlat");
            var mylon = document.getElementById("champlon");
-	   if (document.getElementById("lat") && document.getElementById("lon")){
+	   if (document.getElementById("champlat") && document.getElementById("champlon")){
 	       popup
 	           .setLatLng(e.latlng)
 	           .setContent("You clicked the map at " + e.latlng.toString())
@@ -57,3 +57,4 @@ const LeafIcon = L.Icon.extend({
 
 
 
+initMap()

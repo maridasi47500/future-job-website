@@ -77,16 +77,16 @@ class User(Model):
         myid=None
         msg=""
         try:
-            self.cur.execute("insert into user (lat,lon,description,job_id,email,country_id,phone,password,mypic,gender,nomcomplet) values (:lat,:lon,:description,:job_id,:email,:country_id,:phone,:password,:mypic,:gender,:nomcomplet)",myhash)
+          self.cur.execute("insert into user (lat,lon,description,job_id,email,country_id,phone,password,mypic,gender,nomcomplet) values (:lat,:lon,:description,:job_id,:email,:country_id,:phone,:password,:mypic,:gender,:nomcomplet)",myhash)
           self.con.commit()
           myid=str(self.cur.lastrowid)
 
-          self.cur.execute("select user.*,job.name as jobname,country.unicode from user left join job on job.id = user.job_id left join country on country.id = user.country_id where user.id = ? ",(myid))
+          self.cur.execute("select user.*,job.name as jobname,country.unicode,country.phone as phonenum from user left join job on job.id = user.job_id left join country on country.id = user.country_id where user.id = ? ",(myid))
 
           anyuser=self.cur.fetchone()
           myjobname="../python_become_"+anuyser["jobname"]+anyuser["nomcomplet"].replace(" ","_")
           os.mkdir(myjobname)
-          os.mkdir(myjobname+"/public")
+          os.mkdir(myjobname+"/uploads")
           os.mkdir(myjobname+"/mypage")
           os.mkdir(myjobname+"/css")
           os.mkdir(myjobname+"/js")
@@ -94,9 +94,13 @@ class User(Model):
           os.popen('cp server** '+myjobname) 
           os.popen('cp chaine** '+myjobname) 
           os.popen('cp country** '+myjobname) 
+          os.popen('cp addcountry** '+myjobname) 
+          os.popen('cp addjob** '+myjobname) 
+          os.popen('cp job** '+myjobname) 
           os.popen('cp css/ '+myjobname) 
           os.popen('cp fichier** '+myjobname) 
           os.popen('cp javascript** '+myjobname) 
+          os.popen('cp ./uploads/'+anyuser["mypic"]+myjobname+"/uploads/") 
           os.popen('cp js/ '+myjobname) 
           os.popen('cp model** '+myjobname) 
           os.popen('cp mydb** '+myjobname) 
@@ -112,7 +116,7 @@ class User(Model):
           os.popen('cp user2** '+myjobname+"/user.py") 
           os.popen('cp user/ '+myjobname) 
 
-          Fichier(myjobname+"/welcome","index.html").ecrire("<p>"+anyuser["unicode"]+" "+anyuser["nomcomplet"]+"</p><p>"+anyuser["description"]+"</p>"+"<div id=\"imap\"><div id=\"map\" onclick=\"onMapClick(event);\"></div></div>")
+          Fichier(myjobname+"/welcome","index.html").ecrire("<p>"+anyuser["unicode"]+" "+anyuser["nomcomplet"]+"</p><p>"+("femme" if anyuser["gender"] == "f" else "homme")+"</p><p>"+anyuser["phonenum"]+anyuser["phone"]+"</p/><p>"+anyuser["email"]+"</p><img src=\"/uploads/"+anyuser["mypic"]+"\" width=\"100\" height=\"100\" /><p>"+anyuser["description"]+"</p>"+"<div id=\"imap\"><div id=\"map\" onclick=\"onMapClick(event);\"></div></div>")
           Fichier(myjobname+"/css","App.css").ecrire("#map { width:100%;height:200px;}")
           Fichier(myjobname+"/","route.py").ecrire(Fichier("./","route1.py").lire().replace("name of this directory","become 1 "+anyuser["jobname"]))
           Fichier(myjobname+"/mypage","index.html").ecrire(Fichier("./mypage","index1.html").lire().replace("name of this directory","become 1 "+anyuser["jobname"]))

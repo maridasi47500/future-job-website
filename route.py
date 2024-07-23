@@ -197,7 +197,7 @@ class Route():
             self.set_json("{\"redirect\":\"/newstuff\"}")
             return self.render_figure.render_json()
     def save_user(self,params={}):
-        myparam=self.get_post_data()(params=("country_id","phone","email","gender","mypic","password","password_security","nomcomplet"))
+        myparam=self.get_post_data()(params=("job_id","lat","lon","country_id","phone","email","gender","mypic","password","password_security","nomcomplet"))
         self.user=self.dbUsers.create(myparam)
         if self.user["user_id"]:
             self.set_session(self.user)

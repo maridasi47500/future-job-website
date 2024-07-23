@@ -12,6 +12,14 @@ name
 <input type="text" name="nomcomplet"/>
 
 </td>
+	<td>
+			        <label for="myjob" >numéro de téléphone</label>
+
+				        <select required id="myjob" name="job_id">
+						                <option value="">sélectionnez un job</option>
+								                    <%=render_collection(collection=db.Job.getall(), partial='user/_job.html', as_='job')%>
+										            </select>
+	</td>
 </tr>
 <tr>
 	<td class="field phone_fields">
@@ -37,6 +45,10 @@ name
 <tr>
 </tr>
 <tr>
+<td colspan="2">Description
+	<textarea name="description"></textarea>
+
+</td>
 <td colspan="2">Email
 <input type="text" name="email"/>
 
