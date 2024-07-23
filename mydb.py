@@ -2,8 +2,8 @@ from country import Country
 from user import User
 from ai import Ai
 from stuff import Stuff
-from aistuff import Aistuff
 from post import Post
+from job import Job
 class Mydb():
   def __init__(self):
     print("hello")
@@ -11,5 +11,5 @@ class Mydb():
     self.User=User()
     self.Ai=Ai()
     self.Stuff=Stuff()
-    self.Aistuff=Aistuff()
     self.Post=Post()
+    self.Job=Job()

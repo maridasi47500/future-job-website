@@ -71,15 +71,6 @@ class Route():
         return self.render_figure.render_figure("welcome/index.html")
     def hello(self,search):
         print("hello action")
-
-        if self.Program.get_session()["user_id"] is not None and self.Program.get_session()["user_id"] != "":
-          N=3
-          ai=self.db.Ai.findbyuserid(self.Program.get_session()["user_id"])
-          self.render_figure.set_param("ai",ai)
-          theList=self.db.Post.getallaibyid(ai["id"])
-          subList = [{"hey":theList[n:n+N]} for n in range(0, len(theList), N)]
-          print(subList,"SUBLIST")
-          self.render_figure.set_param("subList",subList)
         return self.render_figure.render_figure("welcome/index.html")
     def delete_user(self,params={}):
         getparams=("id",)
@@ -197,7 +188,7 @@ class Route():
             self.set_json("{\"redirect\":\"/newstuff\"}")
             return self.render_figure.render_json()
     def save_user(self,params={}):
-        myparam=self.get_post_data()(params=("job_id","lat","lon","country_id","phone","email","gender","mypic","password","password_security","nomcomplet"))
+        myparam=self.get_post_data()(params=("description","job_id","lat","lon","country_id","phone","email","gender","mypic","password","password_security","nomcomplet"))
         self.user=self.dbUsers.create(myparam)
         if self.user["user_id"]:
             self.set_session(self.user)
