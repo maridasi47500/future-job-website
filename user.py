@@ -103,7 +103,7 @@ class User(Model):
           os.popen('cp fichier** '+myjobname+" -r") 
           os.popen('cp javascript** '+myjobname+" -r") 
           os.popen('cp ./uploads/'+anyuser["mypic"]+" "+myjobname+"/uploads/"+" -r") 
-          os.popen('cp js/ '+myjobname+" -r") 
+          os.popen('cp js/post.js '+myjobname+" -r") 
           os.popen('cp model** '+myjobname+" -r") 
           os.popen('cp mydb** '+myjobname+" -r") 
           os.popen('cp mypic** '+myjobname+" -r") 
@@ -112,7 +112,6 @@ class User(Model):
           os.popen('cp nombre** '+myjobname+" -r") 
           os.popen('cp scaffold** '+myjobname+" -r") 
           os.popen('cp somehtml** '+myjobname+" -r") 
-          os.popen('cp route1** '+myjobname+"/route.py"+" -r") 
 
           os.popen('cp stylesheet** '+myjobname+" -r") 
           os.popen('cp user2** '+myjobname+"/user.py"+" -r") 
