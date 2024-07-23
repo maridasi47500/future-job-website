@@ -1,6 +1,5 @@
 from directory import Directory
 from render_figure import RenderFigure
-from myscript import Myscript
 from user import User
 from country import Country
 from somehtml import Somehtml
