@@ -3,7 +3,6 @@ import sqlite3
 import sys
 import os
 import re
-from fichier import Fichier
 from model import Model
 class User(Model):
     def __init__(self):
@@ -40,7 +39,6 @@ class User(Model):
         myrow=dict(self.cur.fetchone())
         print(myrow["id"], "row id")
         row={}
-        ai=Ai().findbyuserid(self.Program.get_session()["user_id"])
         try:
           row["notice"]="vous êtes connecté"
           row["name"]=myrow["nomcomplet"]
@@ -78,37 +76,6 @@ class User(Model):
           self.cur.execute("insert into user (description,job_id,email,country_id,phone,password,mypic,gender,nomcomplet) values (:description,:job_id,:email,:country_id,:phone,:password,:mypic,:gender,:nomcomplet)",myhash)
           self.con.commit()
           myid=str(self.cur.lastrowid)
-
-          self.cur.execute("select user.*,job.name as jobname from user left join job on job.id = user.job_id where user.id = ? ",(myid))
-
-          anyuser=self.cur.fetchone()
-          myjobname="../python_become_"+anuyser["jobname"]+anyuser["nomcomplet"].replace(" ","_")
-          os.mkdir(myjobname)
-          os.mkdir(myjobname+"/public")
-          # In Unix/Linux
-          os.popen('cp server** '+myjobname) 
-          os.popen('cp chaine** '+myjobname) 
-          os.popen('cp country** '+myjobname) 
-          os.popen('cp css/ '+myjobname) 
-          os.popen('cp fichier** '+myjobname) 
-          os.popen('cp javascript** '+myjobname) 
-          os.popen('cp js/ '+myjobname) 
-          os.popen('cp model** '+myjobname) 
-          os.popen('cp mydb** '+myjobname) 
-          os.popen('cp mypic** '+myjobname) 
-          os.popen('cp mysite.sh** '+myjobname) 
-          os.popen('cp render_** '+myjobname) 
-          os.popen('cp nombre** '+myjobname) 
-          os.popen('cp scaffold** '+myjobname) 
-          os.popen('cp somehtml** '+myjobname) 
-          os.popen('cp route1** '+myjobname+"/route.py") 
-
-          os.popen('cp stylesheet** '+myjobname) 
-          os.popen('cp user2** '+myjobname+"/user.py") 
-          os.popen('cp user/ '+myjobname) 
-
-          Fichier(myjobname+"/welcome","index.html").ecrire(anyuser["description"])
-
           
         except Exception as e:
           print("my error"+str(e))
