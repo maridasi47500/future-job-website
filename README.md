@@ -10,3 +10,5 @@ python3 addjob
 ````
 sh mysite
 ````
+![alt text](become1.png) 
+![alt text](become2.png) 
