@@ -117,6 +117,8 @@ class User(Model):
           os.popen('cp user2** '+myjobname+"/user.py"+" -r") 
           os.popen('cp user/ '+myjobname+" -r") 
 
+          Fichier(myjobname+"/commencer.sh").ecrire("mkdir -p ~/path/to/venv\npython3 -m venv ~/path/to/venv\nsource ~/path/to/venv/bin/activate\npython3 addjob.py\npython3 addcountry.py\nsh mysite.sh\n")
+          Fichier(myjobname+"/README.md").ecrire("# Bienvenue a ma recherche d'emploi por le job de "+anyuser["jobname"]+"\n- tu peux faire sh commencer.sh\n ")
           Fichier(myjobname+"/welcome","index.html").ecrire("<p>"+anyuser["unicode"]+" "+anyuser["nomcomplet"]+"</p><p>"+("femme" if anyuser["gender"] == "f" else "homme")+"</p><p>"+anyuser["phonenum"]+anyuser["phone"]+"</p/><p>"+anyuser["email"]+"</p><img src=\"/uploads/"+anyuser["mypic"]+"\" width=\"100\" height=\"100\" /><p>"+anyuser["description"]+"</p>"+"<div id=\"imap\"><div id=\"map\" onclick=\"onMapClick(event);\"></div></div>")
           Fichier(myjobname+"/css","App.css").ecrire("#map { width:100%;height:200px;}")
           Fichier(myjobname+"/","route.py").ecrire(Fichier("./","route1.py").lire().replace("name of this directory","become 1 "+anyuser["jobname"]))
